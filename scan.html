@@ -25,18 +25,23 @@
 
 <body class="bg-black text-slate-100 font-display selection:bg-primary/30 h-screen overflow-hidden flex flex-col">
     <!-- Navigation (Floating) -->
+    <!-- Navigation (Floating) -->
     <nav class="absolute top-0 w-full z-50 p-4">
-        <div class="glass-panel rounded-2xl px-4 py-3 flex items-center justify-between max-w-7xl mx-auto">
+        <div
+            class="glass-panel rounded-2xl px-6 py-4 flex items-center justify-between max-w-7xl mx-auto relative z-50">
             <div class="flex items-center gap-1 cursor-pointer" onclick="window.location.href='index.html'">
                 <span class="text-2xl font-bold tracking-tighter text-white">my<span
                         class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-gold">Xchange</span></span>
             </div>
-            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-white/80">
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
                 <a class="hover:text-white transition-colors" href="index.html">Home</a>
                 <a class="hover:text-white transition-colors" href="trends.html">Trends</a>
                 <a class="text-white font-bold" href="scan.html">Scan Price</a>
                 <a class="hover:text-white transition-colors" href="about.html">About</a>
             </div>
+
             <div class="flex items-center gap-3">
                 <!-- From Currency Custom Dropdown -->
                 <div class="relative" id="from-currency-wrapper">
@@ -87,23 +92,25 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden ml-2 text-white hover:text-primary transition-colors p-1"
+                    aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="material-icons text-3xl">menu</span>
+                </button>
             </div>
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-primary transition-colors"
-                aria-label="Toggle navigation menu" aria-expanded="false">
-                <span class="material-icons text-3xl">menu</span>
-            </button>
         </div>
 
-        <!-- Mobile Menu (Hidden by default) -->
+        <!-- Mobile Menu (Floating Dropdown) -->
         <div id="mobile-menu"
-            class="hidden md:hidden bg-black/90 backdrop-blur-xl border-t border-white/10 absolute top-[72px] left-0 w-full p-6 flex flex-col gap-4 z-40 rounded-b-2xl">
-            <a class="text-slate-300 hover:text-white font-medium text-lg py-2 border-b border-white/10 transition-colors"
+            class="hidden md:hidden absolute top-20 left-4 right-4 bg-black/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-4 flex flex-col gap-2 z-40 transform origin-top animate-fade-in-up">
+            <a class="block px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white font-medium transition-colors"
                 href="index.html">Home</a>
-            <a class="text-slate-300 hover:text-white font-medium text-lg py-2 border-b border-white/10 transition-colors"
+            <a class="block px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white font-medium transition-colors"
                 href="trends.html">Trends</a>
-            <a class="text-primary font-bold text-lg py-2 border-b border-white/10" href="scan.html">Scan Price</a>
-            <a class="text-slate-300 hover:text-white font-medium text-lg py-2 transition-colors"
+            <a class="block px-4 py-3 rounded-xl bg-primary/10 text-primary font-bold transition-colors"
+                href="scan.html">Scan Price</a>
+            <a class="block px-4 py-3 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white font-medium transition-colors"
                 href="about.html">About</a>
         </div>
     </nav>
