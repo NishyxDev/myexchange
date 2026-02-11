@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About | myXchange</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet" />
+    <script src="assets/js/nav.js" defer></script>
+</head>
+
+<body class="bg-black text-slate-100 font-display selection:bg-primary/30 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-1 cursor-pointer" onclick="window.location.href='index.html'">
+                <span class="text-2xl font-bold tracking-tighter text-white">my<span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-gold">Xchange</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+                <a class="hover:text-white transition-colors" href="index.html">Home</a>
+                <a class="hover:text-white transition-colors" href="trends.html">Trends</a>
+                <a class="hover:text-white transition-colors" href="scan.html">Scan Price</a>
+                <a class="text-primary font-bold" href="about.html">About</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-primary transition-colors"
+                aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="material-icons text-3xl">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-black/95 backdrop-blur-xl border-t border-white/10 absolute top-20 left-0 w-full p-6 flex flex-col gap-4 shadow-2xl">
+            <a class="text-slate-300 hover:text-white font-medium text-lg py-2 border-b border-white/10 transition-colors"
+                href="index.html">Home</a>
+            <a class="text-slate-300 hover:text-white font-medium text-lg py-2 border-b border-white/10 transition-colors"
+                href="trends.html">Trends</a>
+            <a class="text-slate-300 hover:text-white font-medium text-lg py-2 border-b border-white/10 transition-colors"
+                href="scan.html">Scan Price</a>
+            <a class="text-primary font-bold text-lg py-2 transition-colors" href="about.html">About</a>
+        </div>
+    </nav>
+
+    <main class="flex-1 pt-32 pb-20 px-6">
+        <div class="max-w-5xl mx-auto space-y-24">
+            <!-- Hero Section -->
+            <section class="text-center space-y-6 animate-fade-in-up">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    Our Story
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                    Redefining Global <br />
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent-gold to-primary bg-300% animate-gradient">Currency
+                        Exchange</span>
+                </h1>
+                <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    myXchange bridges the gap between physical pricing and digital conversion, empowering travelers with
+                    instant, accurate financial clarity.
+                </p>
+            </section>
+
+            <!-- Stats/Features Grid -->
+            <section class="grid md:grid-cols-3 gap-6">
+                <div
+                    class="glass-panel p-8 rounded-2xl border border-white/10 hover:border-primary/50 transition-colors group">
+                    <div
+                        class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-icons text-primary text-2xl">speed</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Instant OCR</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Our advanced optical character recognition engine scans price tags in milliseconds, converting
+                        them to your currency instantly.
+                    </p>
+                </div>
+                <div
+                    class="glass-panel p-8 rounded-2xl border border-white/10 hover:border-primary/50 transition-colors group">
+                    <div
+                        class="w-12 h-12 bg-accent-gold/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-icons text-accent-gold text-2xl">trending_up</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Live Market Data</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Stay ahead with real-time exchange rates sourced from reliable global financial institutions,
+                        refreshed every second.
+                    </p>
+                </div>
+                <div
+                    class="glass-panel p-8 rounded-2xl border border-white/10 hover:border-primary/50 transition-colors group">
+                    <div
+                        class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <span class="material-icons text-blue-400 text-2xl">security</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Privacy First</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        All processing happens locally on your device or via secure, encrypted channels. We never store
+                        your personal data.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Mission Statement -->
+            <section class="glass-panel p-10 md:p-16 rounded-3xl border border-white/10 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-gold/10 rounded-full blur-3xl -ml-32 -mb-32">
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-12">
+                    <div class="flex-1 space-y-6">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">Our Mission</h2>
+                        <p class="text-slate-300 text-lg leading-relaxed">
+                            We believe that financial boundaries shouldn't exist. Whether you're a backpacker in Bangkok
+                            or a business traveler in Berlin, knowing the real cost of things shouldn't involve complex
+                            mental math.
+                        </p>
+                        <p class="text-slate-300 text-lg leading-relaxed">
+                            myXchange was built to be the ultimate companion for the modern global citizen—simple,
+                            beautiful, and powerful.
+                        </p>
+                    </div>
+                    <div class="w-full md:w-1/3 flex justify-center">
+                        <div
+                            class="w-40 h-40 rounded-full bg-gradient-to-tr from-primary to-accent-gold p-1 animate-spin-slow">
+                            <div class="w-full h-full bg-black rounded-full flex items-center justify-center">
+                                <span class="text-4xl font-bold text-white tracking-tighter">myX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-black/50 backdrop-blur-md mt-auto">
+        <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <span class="text-slate-500 text-sm">© 2026 myXchange. All rights reserved.</span>
+            <div class="flex items-center gap-6">
+                <a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">Privacy</a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">Terms</a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

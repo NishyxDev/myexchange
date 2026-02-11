@@ -27,17 +27,15 @@
     <!-- Navigation (Floating) -->
     <nav class="absolute top-0 w-full z-50 p-4">
         <div class="glass-panel rounded-2xl px-4 py-3 flex items-center justify-between max-w-7xl mx-auto">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
-                <div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
-                    <span class="material-icons text-white text-sm">currency_exchange</span>
-                </div>
-                <!-- <span class="font-bold tracking-tight">Home</span> -->
+            <div class="flex items-center gap-1 cursor-pointer" onclick="window.location.href='index.html'">
+                <span class="text-2xl font-bold tracking-tighter text-white">my<span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-gold">Xchange</span></span>
             </div>
             <div class="hidden md:flex items-center gap-6 text-sm font-medium text-white/80">
                 <a class="hover:text-white transition-colors" href="index.html">Home</a>
                 <a class="hover:text-white transition-colors" href="trends.html">Trends</a>
                 <a class="text-white font-bold" href="scan.html">Scan Price</a>
-                <a class="hover:text-white transition-colors" href="#">About</a>
+                <a class="hover:text-white transition-colors" href="about.html">About</a>
             </div>
             <div class="flex items-center gap-3">
                 <!-- From Currency Custom Dropdown -->
@@ -51,9 +49,7 @@
                         </div>
                         <span class="material-icons text-xs text-white/50" id="from-arrow">expand_more</span>
                     </button>
-                    <!-- Hidden Input -->
                     <input type="hidden" id="scan-currency-from" value="usd">
-                    <!-- Dropdown Menu -->
                     <div id="from-dropdown-menu"
                         class="hidden absolute top-full left-0 mt-2 w-48 max-h-60 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden flex flex-col dropdown-animate">
                         <div
@@ -62,7 +58,6 @@
                                 class="w-full bg-slate-100 dark:bg-slate-800 rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-primary text-slate-900 dark:text-white placeholder-slate-400">
                         </div>
                         <div class="overflow-y-auto flex-1 custom-scrollbar p-1" id="from-list">
-                            <!-- Options -->
                         </div>
                     </div>
                 </div>
@@ -80,9 +75,7 @@
                         </div>
                         <span class="material-icons text-xs text-white/50" id="to-arrow">expand_more</span>
                     </button>
-                    <!-- Hidden Input -->
                     <input type="hidden" id="scan-currency-to" value="myr">
-                    <!-- Dropdown Menu -->
                     <div id="to-dropdown-menu"
                         class="hidden absolute top-full right-0 mt-2 w-48 max-h-60 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden flex flex-col dropdown-animate">
                         <div
@@ -91,7 +84,6 @@
                                 class="w-full bg-slate-100 dark:bg-slate-800 rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-primary text-slate-900 dark:text-white placeholder-slate-400">
                         </div>
                         <div class="overflow-y-auto flex-1 custom-scrollbar p-1" id="to-list">
-                            <!-- Options -->
                         </div>
                     </div>
                 </div>
@@ -111,36 +103,92 @@
             <a class="text-slate-300 hover:text-white font-medium text-lg py-2 border-b border-white/10 transition-colors"
                 href="trends.html">Trends</a>
             <a class="text-primary font-bold text-lg py-2 border-b border-white/10" href="scan.html">Scan Price</a>
-            @keyframes scan {
+            <a class="text-slate-300 hover:text-white font-medium text-lg py-2 transition-colors"
+                href="about.html">About</a>
+        </div>
+    </nav>
+
+    <!-- Camera Feed -->
+    <main class="flex-1 relative bg-black flex flex-col items-center justify-center overflow-hidden">
+        <video id="camera-stream" autoplay playsinline
+            class="absolute inset-0 w-full h-full object-cover opacity-50"></video>
+
+        <!-- Scanning Frame -->
+        <div class="relative z-10 w-64 h-32 border-2 border-primary/50 rounded-xl overflow-hidden">
+            <div class="absolute inset-0 border-2 border-white/20 rounded-xl"></div>
+            <!-- Scanning Line -->
+            <div
+                class="absolute top-0 left-0 w-full h-1 bg-accent-gold/80 shadow-[0_0_15px_rgba(212,175,55,0.8)] animate-[scan_2s_ease-in-out_infinite]">
+            </div>
+            <div
+                class="absolute -top-6 left-0 w-full text-center text-xs font-bold uppercase tracking-widest text-primary/80 animate-pulse">
+                Align Price Tag Here
+            </div>
+        </div>
+
+        <!-- Result Overlay (Initially Hidden) -->
+        <div id="result-overlay" class="hidden absolute bottom-32 left-0 right-0 px-6 z-20">
+            <div
+                class="glass-panel p-6 rounded-2xl border-t border-white/20 shadow-2xl animate-[slideUp_0.3s_ease-out]">
+                <div class="flex justify-between items-start mb-2">
+                    <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Detected Price</div>
+                    <button id="close-result" class="text-slate-400 hover:text-white"><span
+                            class="material-icons">close</span></button>
+                </div>
+                <div class="flex items-baseline gap-2 mb-4">
+                    <span class="text-2xl font-bold text-slate-300" id="detected-amount">--</span>
+                </div>
+                <div class="h-px bg-white/10 w-full mb-4"></div>
+                <div class="text-accent-gold text-xs font-bold uppercase tracking-wider mb-1">Converted Amount</div>
+                <div class="text-4xl font-extrabold text-white flex items-baseline gap-1" id="converted-amount">
+                    <span class="text-xl">MYR</span> --
+                </div>
+            </div>
+        </div>
+
+        <canvas id="snapshot-canvas" class="hidden"></canvas>
+    </main>
+
+    <!-- Controls -->
+    <footer
+        class="absolute bottom-0 w-full p-8 z-50 flex justify-center items-center bg-gradient-to-t from-black via-black/80 to-transparent">
+        <button id="capture-btn" aria-label="Capture and scan price tag"
+            class="w-20 h-20 rounded-full border-4 border-white/30 flex items-center justify-center relative overflow-hidden group hover:border-white transition-all shadow-lg shadow-primary/20">
+            <div class="w-16 h-16 bg-white rounded-full group-hover:scale-90 transition-transform duration-200"></div>
+        </button>
+    </footer>
+
+    <style>
+        @keyframes scan {
 
             0%,
             100% {
-            top: 0;
-            opacity: 0;
+                top: 0;
+                opacity: 0;
             }
 
             10%,
             90% {
-            opacity: 1;
+                opacity: 1;
             }
 
             50% {
-            top: 100%;
+                top: 100%;
             }
-            }
+        }
 
-            @keyframes slideUp {
+        @keyframes slideUp {
             from {
-            transform: translateY(100%);
-            opacity: 0;
+                transform: translateY(100%);
+                opacity: 0;
             }
 
             to {
-            transform: translateY(0);
-            opacity: 1;
+                transform: translateY(0);
+                opacity: 1;
             }
-            }
-            </style>
+        }
+    </style>
 </body>
 
 </html>
