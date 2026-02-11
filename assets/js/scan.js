@@ -22,9 +22,19 @@ let state = {
 
 // DOM Elements
 const elements = {
+    // Camera Elements
     video: document.getElementById('camera-stream'),
     canvas: document.getElementById('snapshot-canvas'),
     captureBtn: document.getElementById('capture-btn'),
+
+    // Upload Elements
+    uploadBtn: document.getElementById('upload-btn'),
+    fileInput: document.getElementById('file-input'),
+    previewContainer: document.getElementById('image-preview-container'),
+    previewImage: document.getElementById('image-preview'),
+    clearPreviewBtn: document.getElementById('clear-preview-btn'),
+
+    // Result Elements
     resultOverlay: document.getElementById('result-overlay'),
     detectedDisplay: document.getElementById('detected-amount'),
     convertedDisplay: document.getElementById('converted-amount'),
@@ -58,7 +68,7 @@ async function init() {
         setupDropdowns();
         setupEventListeners();
 
-        await startCamera();
+        // Camera will be started by setupEventListeners
         await fetchRate(state.from);
 
         console.log('Scanner Initialized');
@@ -224,7 +234,7 @@ function updateFlagAndText(type, code) {
 
 
 /**
- * Start Camera Stream
+ * Camera & Upload Logic
  */
 async function startCamera() {
     try {
@@ -234,6 +244,7 @@ async function startCamera() {
         });
         elements.video.srcObject = stream;
         state.stream = stream;
+        elements.video.play(); // Start playing the stream
     } catch (err) {
         throw err;
     }
@@ -253,35 +264,24 @@ async function fetchRate(fromCurrency) {
 }
 
 /**
- * Capture and Process Image
+ * Unified Process Function
  */
-async function captureAndProcess() {
+async function processImageSource(imageSource) {
     if (state.isProcessing) return;
 
     state.isProcessing = true;
     elements.captureBtn.classList.add('opacity-50', 'pointer-events-none');
-    elements.captureBtn.innerHTML = '<span class="material-icons animate-spin text-primary">autorenew</span>'; // Loading icon
-
-    // Draw video frame to canvas
-    const ctx = elements.canvas.getContext('2d');
-    elements.canvas.width = elements.video.videoWidth;
-    elements.canvas.height = elements.video.videoHeight;
-    ctx.drawImage(elements.video, 0, 0);
-
-    // Get image data URL
-    const image = elements.canvas.toDataURL('image/png');
+    elements.captureBtn.innerHTML = '<span class="material-icons animate-spin text-primary">autorenew</span>';
 
     try {
-        // Recognize Text
         const result = await Tesseract.recognize(
-            image,
+            imageSource,
             'eng',
             { logger: m => console.log(m) }
         );
 
         const text = result.data.text;
         console.log('OCR Result:', text);
-
         processText(text);
 
     } catch (error) {
@@ -298,6 +298,8 @@ async function captureAndProcess() {
  * Extract Price and Convert
  */
 function processText(text) {
+    // Matches 12.99, 1,234.50, $12.99, RM123
+    // Simple regex for grabbing the first valid number-like string
     const priceRegex = /(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2}))/g;
     const matches = text.match(priceRegex);
 
@@ -311,7 +313,7 @@ function processText(text) {
             alert('Could not detect a valid price number.');
         }
     } else {
-        alert('No price detected. Please try holding the camera closer.');
+        alert('No price detected. Please try holding the camera closer or uploading a clearer image.');
     }
 }
 
@@ -319,21 +321,21 @@ function processText(text) {
  * Show Conversion Result
  */
 function showResult(amount) {
-    const fromCurrency = state.from;
     const targetCurrency = state.target;
-
     const rate = state.rates[targetCurrency];
 
     if (!rate) {
-        fetchRate(fromCurrency).then(() => showResult(amount));
+        fetchRate(state.from).then(() => showResult(amount));
         return;
     }
 
     const converted = amount * rate;
 
+    // Format Display
     elements.detectedDisplay.textContent = `${amount.toFixed(2)}`;
 
-    elements.convertedDisplay.innerHTML = `<span class="text-xl">${targetCurrency.toUpperCase()}</span> ${converted.toFixed(2)}`;
+    const symbol = targetCurrency.toUpperCase();
+    elements.convertedDisplay.innerHTML = `<span class="text-xl">${symbol}</span> ${converted.toFixed(2)}`;
 
     elements.resultOverlay.classList.remove('hidden');
 }
@@ -342,8 +344,65 @@ function showResult(amount) {
  * Event Listeners
  */
 function setupEventListeners() {
-    elements.captureBtn.addEventListener('click', captureAndProcess);
+    // Start camera initially
+    startCamera();
 
+    // 1. Capture Button (Camera vs Preview)
+    elements.captureBtn.addEventListener('click', () => {
+        if (!elements.previewContainer.classList.contains('hidden')) {
+            // Process the uploaded image
+            processImageSource(elements.previewImage); // Tesseract accepts <img>
+        } else {
+            // Process Camera Frame via Canvas
+            const ctx = elements.canvas.getContext('2d');
+            elements.canvas.width = elements.video.videoWidth;
+            elements.canvas.height = elements.video.videoHeight;
+            ctx.drawImage(elements.video, 0, 0, elements.canvas.width, elements.canvas.height);
+            const image = elements.canvas.toDataURL('image/png');
+            processImageSource(image);
+        }
+    });
+
+    // 2. Upload Button
+    if (elements.uploadBtn) {
+        elements.uploadBtn.addEventListener('click', () => {
+            elements.fileInput.click();
+        });
+    }
+
+    // 3. File Input Change
+    if (elements.fileInput) {
+        elements.fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    elements.previewImage.src = e.target.result;
+                    elements.previewContainer.classList.remove('hidden');
+                    // Stop camera stream to save battery
+                    if (state.stream) state.stream.getVideoTracks().forEach(track => track.enabled = false);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // 4. Clear Preview
+    if (elements.clearPreviewBtn) {
+        elements.clearPreviewBtn.addEventListener('click', () => {
+            elements.previewImage.src = '';
+            elements.previewContainer.classList.add('hidden');
+            elements.fileInput.value = '';
+
+            // Resume Camera
+            if (state.stream) state.stream.getVideoTracks().forEach(track => track.enabled = true);
+
+            // Hide result if shown
+            elements.resultOverlay.classList.add('hidden');
+        });
+    }
+
+    // 5. Result Overlay
     elements.closeResultBtn.addEventListener('click', () => {
         elements.resultOverlay.classList.add('hidden');
     });
