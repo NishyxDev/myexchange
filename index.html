@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description"
+        content="Convert currencies in real-time with premium exchange rates. Fast, accurate, and beautifully designed currency converter with 150+ global currencies.">
+    <title>Premium Currency Exchange | Global Standard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="assets/js/nav.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary/30">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-primary/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-primary rounded flex items-center justify-center">
+                    <span class="material-icons text-white">currency_exchange</span>
+                </div>
+                <span class="text-xl font-bold tracking-tight">code<span
+                        class="text-primary text-accent-gold">DF</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a class="text-primary font-bold" href="index.html">Home</a>
+                <a class="hover:text-primary transition-colors" href="trends.html">Trends</a>
+                <a class="hover:text-primary transition-colors" href="scan.html">Scan Price</a>
+                <a class="hover:text-primary transition-colors" href="#">About</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-500 hover:text-primary transition-colors"
+                aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="material-icons text-3xl">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 absolute top-20 left-0 w-full shadow-2xl p-6 flex flex-col gap-4 z-40 transform transition-all duration-300 origin-top">
+            <a class="text-primary font-bold text-lg py-2 border-b border-slate-100 dark:border-slate-800"
+                href="index.html">Home</a>
+            <a class="text-slate-600 dark:text-slate-300 hover:text-primary font-medium text-lg py-2 border-b border-slate-100 dark:border-slate-800 transition-colors"
+                href="trends.html">Trends</a>
+            <a class="text-slate-600 dark:text-slate-300 hover:text-primary font-medium text-lg py-2 border-b border-slate-100 dark:border-slate-800 transition-colors"
+                href="scan.html">Scan Price</a>
+            <a class="text-slate-600 dark:text-slate-300 hover:text-primary font-medium text-lg py-2 border-b border-slate-100 dark:border-slate-800 transition-colors"
+                href="#">Rates</a>
+            <a class="text-slate-600 dark:text-slate-300 hover:text-primary font-medium text-lg py-2 transition-colors"
+                href="#">About</a>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <main class="relative pt-32 pb-20 overflow-hidden">
+        <!-- Floating Elements Background -->
+        <div class="absolute inset-0 z-0 currency-gradient"></div>
+        <div class="absolute top-40 left-10 opacity-20 pointer-events-none">
+            <img alt="Floating 3D gold dollar sign with metallic texture" class="w-32 h-32 blur-sm"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxx-MkFF3bwfiD-iMxTPkSbS9GpEbd8tnyjR1g46u95mygTXgNL7vQPrAm-hMd06WDydCEeA2iEcwzv7m4tdCXMZVNuollhQbddOR9SMN4MaMmty0JwPv5K7PMntazUh1GhgosEcMgvDOuwk6fzBr_7GRqIjQCFPSlQ8pJCwbyfqnfN8XdKtRb0i69DZZXjibfksa8caQEiqWXDYKu03G6PwXlIQXLtIfb5vjBOqr36WBaVQgy62tmKxkathHjFkH7XKxBsHyGoLeZ" />
+        </div>
+        <div class="absolute bottom-20 right-10 opacity-20 pointer-events-none">
+            <img alt="Floating 3D gold euro sign with metallic texture" class="w-40 h-40 blur-[2px]"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh2gZg0fXUZAycvewef5dKPiLoq0G66fy94Fhebe-3deYi_XWZmazEowKyZ_oyRRiIIoeFsMZbJxmRVGFGhSnOFrQQkoBIKub9-JvKm77om0dyEtp0yPUFXLFiBDypv0mU9T68Er2sJiWPZXTndu_Yb8_lQNJ48K8500jftMvEgrOSNDp90HMh9sp67xPX7lPbbptu5M2LElcf1QVCAr2_JhUV8cWjXu3ZeSJUej5E4HP3LMnHrhQO0MUPIku272yvQ5RkpFyTpG-c" />
+        </div>
+        <div class="absolute top-1/4 right-1/4 opacity-10 pointer-events-none">
+            <img alt="Floating 3D gold yen sign" class="w-24 h-24"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqNxELOsNLCL-8Z-AL4BG8k5C00quh4V4AW_L2jq2aaijb67zaIC1KXYPPvoDr_aYZP0zzgeQBaV7s3x4Ib197COu-4NPz7MU6MAle6LF613S2diS1qb4gPUhjbw1VjAUu3LRv4rHjQTT-iAHivpc5QxaCzi6N-MfAhqR_s62eqo9gX6jeqbXkkM8bCAyMcjUv-4uEhD4pLUzszYe3yYvWb5S-tLz_fmzzvcpIoTCCtAsi9Mhjj-Hejgrzd4QqiAwQoTenlt0K6t3p" />
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-6">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Live Exchange Rates
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-[1.1]">
+                Exchange Currency at the<br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-gold">True Mid-Market
+                    Rate.</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl text-lg mb-12">
+                Experience the premium standard of global transfers. Secure, transparent, and significantly cheaper than
+                traditional banks. No hidden fees, ever.
+            </p>
+            <!-- Converter Card -->
+            <div
+                class="w-full max-w-4xl bg-white dark:bg-slate-900/50 p-1 rounded-2xl shadow-2xl border border-white/10">
+                <div
+                    class="bg-slate-50 dark:bg-slate-800/80 rounded-xl p-8 flex flex-col md:flex-row gap-8 items-center">
+                    <!-- Send Section -->
+                    <div class="flex-1 w-full text-left">
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 px-1">You
+                            Send</label>
+                        <div class="relative group">
+                            <input id="amount-input"
+                                class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-4 text-2xl font-bold focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                                type="number" value="1000" />
+                            <div class="absolute right-2 top-2 bottom-2" id="from-currency-wrapper">
+                                <!-- Custom Dropdown Trigger -->
+                                <button type="button" id="from-dropdown-btn"
+                                    class="h-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-4 rounded-lg transition-colors border border-transparent flex items-center gap-2 min-w-[140px] justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <img id="from-flag" src="https://flagcdn.com/w40/us.png" alt="US"
+                                            class="w-6 h-6 rounded-full object-cover shadow-sm">
+                                        <span id="from-code" class="font-bold text-lg">USD</span>
+                                    </div>
+                                    <span
+                                        class="material-icons text-sm text-slate-400 transform transition-transform duration-200"
+                                        id="from-arrow">expand_more</span>
+                                </button>
+                                <!-- Hidden Input -->
+                                <input type="hidden" id="from-currency-select" value="usd">
+
+                                <!-- Dropdown Menu -->
+                                <div id="from-dropdown-menu"
+                                    class="hidden absolute top-full left-0 mt-2 w-64 max-h-80 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden flex flex-col dropdown-animate">
+                                    <div
+                                        class="p-3 border-b border-slate-100 dark:border-slate-800 sticky top-0 bg-white dark:bg-slate-900 z-10">
+                                        <input type="text" id="from-search" placeholder="Search..."
+                                            class="w-full bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-slate-900 dark:text-white placeholder-slate-400">
+                                    </div>
+                                    <div class="overflow-y-auto flex-1 custom-scrollbar p-1" id="from-list">
+                                        <!-- Options -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Swap Icon -->
+                    <div class="flex items-center justify-center">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white shadow-xl shadow-primary/40 cursor-pointer hover:rotate-180 transition-transform duration-500"
+                            id="swap-btn">
+                            <span class="material-icons">swap_horiz</span>
+                        </div>
+                    </div>
+                    <!-- Receive Section -->
+                    <div class="flex-1 w-full text-left">
+                        <label
+                            class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 px-1">Recipient
+                            Gets</label>
+                        <div class="relative">
+                            <input id="result-input"
+                                class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 rounded-xl px-4 py-4 text-2xl font-bold focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                                type="number" readonly value="" />
+                            <div class="absolute right-2 top-2 bottom-2" id="to-currency-wrapper">
+                                <!-- Custom Dropdown Trigger -->
+                                <button type="button" id="to-dropdown-btn"
+                                    class="h-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-4 rounded-lg transition-colors border border-transparent flex items-center gap-2 min-w-[140px] justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <img id="to-flag" src="https://flagcdn.com/w40/eu.png" alt="EU"
+                                            class="w-6 h-6 rounded-full object-cover shadow-sm">
+                                        <span id="to-code" class="font-bold text-lg">EUR</span>
+                                    </div>
+                                    <span
+                                        class="material-icons text-sm text-slate-400 transform transition-transform duration-200"
+                                        id="to-arrow">expand_more</span>
+                                </button>
+                                <!-- Hidden Input -->
+                                <input type="hidden" id="to-currency-select" value="eur">
+
+                                <!-- Dropdown Menu -->
+                                <div id="to-dropdown-menu"
+                                    class="hidden absolute top-full right-0 mt-2 w-64 max-h-80 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden flex flex-col dropdown-animate">
+                                    <div
+                                        class="p-3 border-b border-slate-100 dark:border-slate-800 sticky top-0 bg-white dark:bg-slate-900 z-10">
+                                        <input type="text" id="to-search" placeholder="Search..."
+                                            class="w-full bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-slate-900 dark:text-white placeholder-slate-400">
+                                    </div>
+                                    <div class="overflow-y-auto flex-1 custom-scrollbar p-1" id="to-list">
+                                        <!-- Options -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Rate Details Bar -->
+                <div
+                    class="px-8 py-4 flex flex-wrap gap-6 items-center justify-between text-sm text-slate-400 border-t border-white/5 bg-slate-100/50 dark:bg-slate-900/30 rounded-b-xl">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-sm text-primary">info</span>
+                        <span>Fee: <strong class="text-slate-100">0.00 USD</strong> <span
+                                class="text-xs opacity-50 ml-1" id="last-updated"></span></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-sm text-accent-gold">trending_up</span>
+                        <span id="rate-info">Rate: <strong class="text-slate-100">Loading...</strong></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Trust Badges -->
+            <div class="mt-12 flex flex-col items-center">
+                <div class="flex items-center gap-1 text-accent-gold mb-2">
+                    <span class="material-icons text-sm">star</span>
+                    <span class="material-icons text-sm">star</span>
+                    <span class="material-icons text-sm">star</span>
+                    <span class="material-icons text-sm">star</span>
+                    <span class="material-icons text-sm">star_half</span>
+                </div>
+                <p class="text-sm font-medium">Rated 4.9/5 by 20,000+ Institutional Clients</p>
+            </div>
+        </div>
+    </main>
+    <!-- Ticker Section -->
+    <section class="border-y border-white/10 py-6 overflow-hidden bg-white/5">
+        <div class="ticker-scroll whitespace-nowrap">
+            <!-- Ticker Items -->
+            <div class="flex items-center gap-12 px-6">
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">EUR/USD</span>
+                    <span class="text-green-400">1.0824</span>
+                    <span class="text-xs bg-green-400/20 text-green-400 px-1.5 rounded">+0.12%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">GBP/USD</span>
+                    <span class="text-red-400">1.2655</span>
+                    <span class="text-xs bg-red-400/20 text-red-400 px-1.5 rounded">-0.05%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">USD/JPY</span>
+                    <span class="text-green-400">151.32</span>
+                    <span class="text-xs bg-green-400/20 text-green-400 px-1.5 rounded">+0.42%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">AUD/USD</span>
+                    <span class="text-green-400">0.6542</span>
+                    <span class="text-xs bg-green-400/20 text-green-400 px-1.5 rounded">+0.08%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">BTC/USD</span>
+                    <span class="text-green-400">67,421.00</span>
+                    <span class="text-xs bg-green-400/20 text-green-400 px-1.5 rounded">+2.15%</span>
+                </div>
+            </div>
+            <!-- Duplicated for seamless loop -->
+            <div class="flex items-center gap-12 px-6">
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">EUR/USD</span>
+                    <span class="text-green-400">1.0824</span>
+                    <span class="text-xs bg-green-400/20 text-green-400 px-1.5 rounded">+0.12%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">GBP/USD</span>
+                    <span class="text-red-400">1.2655</span>
+                    <span class="text-xs bg-red-400/20 text-red-400 px-1.5 rounded">-0.05%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">USD/JPY</span>
+                    <span class="text-green-400">151.32</span>
+                    <span class="text-xs bg-green-400/20 text-green-400 px-1.5 rounded">+0.42%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">AUD/USD</span>
+                    <span class="text-green-400">0.6542</span>
+                    <span class="text-xs bg-green-400/20 text-green-400 px-1.5 rounded">+0.08%</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="font-bold">BTC/USD</span>
+                    <span class="text-green-400">67,421.00</span>
+                    <span class="text-xs bg-green-400/20 text-green-400 px-1.5 rounded">+2.15%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Trusted Partners Section -->
+    <section class="py-16 border-y border-white/5 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-center text-xs font-bold text-slate-500 uppercase tracking-[0.2em] mb-10">Trusted by Global
+                Financial Institutions</p>
+            <div
+                class="grid grid-cols-2 md:grid-cols-5 gap-12 items-center opacity-40 grayscale hover:grayscale-0 transition-all">
+                <div class="flex justify-center">
+                    <img alt="" class="h-8" data-alt="Monochrome institutional bank logo"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBNkqBa4Ocx6EPDLpzdcS5UX9OhRb6YkgFQ2bpsk7K4neXLUOnBxqHw-mvfdis_0KQIu5u0XVt9PgoXmJ6t4EUyhnii3yP1eMiSSt4H2NVTrXfEJMbUDlfyMVYMLHqk6JVro-s1cZgW4NoSBp_bHPDm4wbEGwfX9dTKFLhXMDY_8yIbaoAw8h7n_H4Y2Rpu6Tz3i68cHaWmGIKpKC0BBr6V1ad50-l2O3QMxAflINPbf6pCFFEI4oe9MjDnU0ZQEkPOa7N_GvUYP_4" />
+                </div>
+                <div class="flex justify-center">
+                    <img alt="" class="h-8" data-alt="Monochrome investment bank logo"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1_BYgTNQXCWsGYvKrlbxAi6ptuILvOzbhO-V-AbkgYcM08QnB0u5oSc-Xc_jnXkDLQU1YO_MkcgN5gccDTokO2Mbt0V3i1pnHhKZeHxco3ES4QfR8ESFC23orVnTNgWxFi3XjUNYEAMXkKNOoEYO5Rs9wq2Iuj_7L3k-M7RTNL-QVZb_PUIl0S9FvZ9IR3Eitu89mRSknwaELsYSDtVdvrPp-SslLCqyx4_4MijmxrlvuKdz9rXlUURcW_TnkW5u3i-wxeFjd-9_m" />
+                </div>
+                <div class="flex justify-center">
+                    <img alt="" class="h-8" data-alt="Monochrome global bank logo"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBG0KCP9a8sDPWfIhstYq8gzEL71pNj3o-FHVx0EeTI_mfAFnu83k5CzL8pt4JvRC4otbTyrlcUGgfcDlEl4mj6hHHxFGYgxLUgXv-SKJ31Ex60eMxfoh_6JYEyeYMt2P70RldGizkT2DLlN-iT4Z1WFPolNAB889jLPRdfsaP9JxjaREKsNmDhhh3r7cPjFS2jZm2xPkWMw5Ol-PpbL-wtIgaeSAmrO0_pRuDK4fJ3CCH0U4XMoGb0EMkxmPowDjsGH7Y_-aS_EaIu" />
+                </div>
+                <div class="flex justify-center">
+                    <img alt="" class="h-8" data-alt="Monochrome financial services logo"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGEM_MHgVGKXU478cc8FXZG5sXpcSPWfNvy2cqcaaVKtQH7PpqES5MEX8uMSLaZgAHk8zFaXB44BP56mQj_2O-RFeKQ6SVxaxREhlYtjcTcsmt04D1Uag74ZSqz-RUdsdcGnQD_R94iU5p8f3OK6UoJkrxSLaX1cXDt3FodqqqSqQ-91JMMlswmbh7B7nWqunxrmduyCdgH8JyduNdblg_rlNXgJlMHrITkTj0tu-FjTuY-vt7irapcqrufMhinrb6bHiLwmwNTt1n" />
+                </div>
+                <div class="flex justify-center">
+                    <img alt="" class="h-8" data-alt="Monochrome investment firm logo"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-M62t8fZvSCAuYdVFyJIKgrSd6nnq9R4753zek1B_hsB24AYB3RQHv7v6uYUIGM5d8bjnHzRm73Oqm96VzIUghfE0k9TR4BqPWUrbac8Nq2ZGaXYjZO8crDEdfBrWggRIvpyCybOnoiUTTTORfrYnRIwl02dTEpI5cMg16Kb995DEln0Vkig3RkyQEP4jtv6uBUDn4fY8tUFvLJwKQafLmalFzjbtcK_ljnAOvlN-cy2zteq5WE4Rq8OL8sKo9SSOtxcHbz2J3xk7" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Grid -->
+    <section class="py-24 max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div
+                class="p-8 rounded-2xl bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 group hover:border-primary/50 transition-all">
+                <div
+                    class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                    <span class="material-icons text-primary group-hover:text-white">speed</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Instant Transfers</h3>
+                <p class="text-slate-500 leading-relaxed">
+                    Over 80% of our transfers arrive in under 10 seconds. Experience the speed of modern financial
+                    networks.
+                </p>
+            </div>
+            <!-- Feature 2 -->
+            <div
+                class="p-8 rounded-2xl bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 group hover:border-primary/50 transition-all">
+                <div
+                    class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                    <span class="material-icons text-primary group-hover:text-white">security</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Bank-Grade Security</h3>
+                <p class="text-slate-500 leading-relaxed">
+                    Fully regulated by FCA and FinCEN. Your funds are kept in segregated accounts at top-tier banks.
+                </p>
+            </div>
+            <!-- Feature 3 -->
+            <div
+                class="p-8 rounded-2xl bg-slate-100/50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 group hover:border-primary/50 transition-all">
+                <div
+                    class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
+                    <span class="material-icons text-primary group-hover:text-white">monetization_on</span>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Lowest Fees Guaranteed</h3>
+                <p class="text-slate-500 leading-relaxed">
+                    We use the real mid-market exchange rate. No markups, no hidden spreads, just pure transparency.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-5xl mx-auto relative rounded-3xl overflow-hidden">
+            <div class="absolute inset-0 bg-primary"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent-gold opacity-50"></div>
+            <div class="relative z-10 p-12 md:p-20 text-center flex flex-col items-center">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">Ready to upgrade your exchange
+                    experience?</h2>
+                <p class="text-white/80 text-lg mb-10 max-w-2xl">
+                    Join over 5 million people and businesses who get a better deal when they send money abroad.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button
+                        class="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 transition-colors shadow-xl">
+                        Open a Free Account
+                    </button>
+                    <button
+                        class="bg-slate-900/20 text-white backdrop-blur-md border border-white/20 px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-colors">
+                        Calculate Savings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-slate-100 dark:bg-slate-950 pt-20 pb-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-12 mb-20">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                            <span class="material-icons text-white text-sm">currency_exchange</span>
+                        </div>
+                        <span class="text-lg font-bold">PLATINUM<span class="text-accent-gold">EX</span></span>
+                    </div>
+                    <p class="text-slate-500 mb-8 max-w-sm">
+                        The premium global standard for international money transfers. Faster, cheaper, and more secure
+                        than traditional banking.
+                    </p>
+                    <div class="flex gap-4">
+                        <a class="w-10 h-10 rounded-lg bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-all"
+                            href="#">
+                            <span class="material-icons text-xl">facebook</span>
+                        </a>
+                        <a class="w-10 h-10 rounded-lg bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-all"
+                            href="#">
+                            <span class="material-icons text-xl">language</span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Product</h4>
+                    <ul class="space-y-4 text-slate-500 text-sm">
+                        <li><a class="hover:text-primary" href="#">Money Transfer</a></li>
+                        <li><a class="hover:text-primary" href="#">Global Account</a></li>
+                        <li><a class="hover:text-primary" href="#">Business Account</a></li>
+                        <li><a class="hover:text-primary" href="#">Integrations</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Company</h4>
+                    <ul class="space-y-4 text-slate-500 text-sm">
+                        <li><a class="hover:text-primary" href="#">About Us</a></li>
+                        <li><a class="hover:text-primary" href="#">Careers</a></li>
+                        <li><a class="hover:text-primary" href="#">Press</a></li>
+                        <li><a class="hover:text-primary" href="#">Security</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Legal</h4>
+                    <ul class="space-y-4 text-slate-500 text-sm">
+                        <li><a class="hover:text-primary" href="#">Terms of Service</a></li>
+                        <li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-primary" href="#">Cookie Policy</a></li>
+                        <li><a class="hover:text-primary" href="#">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between gap-6 text-xs text-slate-600 font-medium">
+                <p>© 2024 PlatinumEX Financial Services. All rights reserved.</p>
+                <p>Licensed &amp; Regulated by the Financial Conduct Authority (FCA) No. 900507</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

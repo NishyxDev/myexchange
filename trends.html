@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description"
+        content="Visualize currency exchange rate trends with interactive charts. Track historical data for 7-30 days and make informed currency decisions.">
+    <title>Currency Trends | Premium Exchange</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/nav.js" defer></script>
+    <script src="assets/js/trends.js" defer></script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display selection:bg-primary/30">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-primary/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="w-10 h-10 bg-primary rounded flex items-center justify-center">
+                    <span class="material-icons text-white">currency_exchange</span>
+                </div>
+                <span class="text-xl font-bold tracking-tight">PLATINUM<span
+                        class="text-primary text-accent-gold">EX</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a class="hover:text-primary transition-colors text-slate-500" href="index.html">Home</a>
+                <a class="text-primary font-bold" href="trends.html">Trends</a>
+                <a class="hover:text-primary transition-colors text-slate-500" href="scan.html">Scan Price</a>
+                <a class="hover:text-primary transition-colors text-slate-500" href="#">About</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-500 hover:text-primary transition-colors"
+                aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="material-icons text-3xl">menu</span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 absolute top-20 left-0 w-full shadow-2xl p-6 flex flex-col gap-4 z-40 transform transition-all duration-300 origin-top">
+            <a class="text-slate-600 dark:text-slate-300 hover:text-primary font-medium text-lg py-2 border-b border-slate-100 dark:border-slate-800 transition-colors"
+                href="index.html">Home</a>
+            <a class="text-primary font-bold text-lg py-2 border-b border-slate-100 dark:border-slate-800"
+                href="trends.html">Trends</a>
+            <a class="text-slate-600 dark:text-slate-300 hover:text-primary font-medium text-lg py-2 border-b border-slate-100 dark:border-slate-800 transition-colors"
+                href="scan.html">Scan Price</a>
+            <a class="text-slate-600 dark:text-slate-300 hover:text-primary font-medium text-lg py-2 border-b border-slate-100 dark:border-slate-800 transition-colors"
+                href="#">Rates</a>
+            <a class="text-slate-600 dark:text-slate-300 hover:text-primary font-medium text-lg py-2 transition-colors"
+                href="#">About</a>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="relative pt-32 pb-20 min-h-screen">
+        <div class="absolute inset-0 z-0 currency-gradient"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Historical Market Trends</h1>
+                <p class="text-slate-400">Analyze currency performance over the last 30 days.</p>
+            </div>
+
+            <!-- Controls Card -->
+            <div
+                class="relative z-30 bg-white dark:bg-slate-900/50 p-6 rounded-2xl shadow-xl border border-white/10 mb-8 backdrop-blur-md">
+                <div class="flex flex-col md:flex-row gap-6 items-center justify-center">
+                    <!-- Base Currency -->
+                    <div class="relative w-full md:w-64">
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Base
+                            Currency</label>
+                        <!-- Custom Dropdown Trigger -->
+                        <div class="relative" id="base-currency-wrapper">
+                            <button type="button" id="base-dropdown-btn"
+                                class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-4 py-3 rounded-xl transition-colors border border-transparent flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img id="base-flag" src="https://flagcdn.com/w40/us.png" alt="US"
+                                        class="w-6 h-6 rounded-full object-cover shadow-sm">
+                                    <span id="base-code" class="font-bold text-lg">USD</span>
+                                </div>
+                                <span
+                                    class="material-icons text-sm text-slate-400 transform transition-transform duration-200"
+                                    id="base-arrow">expand_more</span>
+                            </button>
+                            <!-- Hidden Input -->
+                            <input type="hidden" id="trend-base" value="USD">
+
+                            <!-- Dropdown Menu -->
+                            <div id="base-dropdown-menu"
+                                class="hidden absolute top-full left-0 mt-2 w-full max-h-60 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden flex flex-col dropdown-animate">
+                                <div
+                                    class="p-3 border-b border-slate-100 dark:border-slate-800 sticky top-0 bg-white dark:bg-slate-900 z-10">
+                                    <input type="text" id="base-search" placeholder="Search..."
+                                        class="w-full bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-slate-900 dark:text-white placeholder-slate-400">
+                                </div>
+                                <div class="overflow-y-auto flex-1 custom-scrollbar p-1" id="base-list">
+                                    <!-- Options -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Swap -->
+                    <button id="trend-swap"
+                        class="mt-6 p-3 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+                        <span class="material-icons">swap_horiz</span>
+                    </button>
+
+                    <!-- Target Currency -->
+                    <div class="relative w-full md:w-64">
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Target
+                            Currency</label>
+                        <!-- Custom Dropdown Trigger -->
+                        <div class="relative" id="target-currency-wrapper">
+                            <button type="button" id="target-dropdown-btn"
+                                class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-4 py-3 rounded-xl transition-colors border border-transparent flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img id="target-flag" src="https://flagcdn.com/w40/eu.png" alt="EU"
+                                        class="w-6 h-6 rounded-full object-cover shadow-sm">
+                                    <span id="target-code" class="font-bold text-lg">EUR</span>
+                                </div>
+                                <span
+                                    class="material-icons text-sm text-slate-400 transform transition-transform duration-200"
+                                    id="target-arrow">expand_more</span>
+                            </button>
+                            <!-- Hidden Input -->
+                            <input type="hidden" id="trend-target" value="EUR">
+
+                            <!-- Dropdown Menu -->
+                            <div id="target-dropdown-menu"
+                                class="hidden absolute top-full left-0 mt-2 w-full max-h-60 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 z-50 overflow-hidden flex flex-col dropdown-animate">
+                                <div
+                                    class="p-3 border-b border-slate-100 dark:border-slate-800 sticky top-0 bg-white dark:bg-slate-900 z-10">
+                                    <input type="text" id="target-search" placeholder="Search..."
+                                        class="w-full bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary text-slate-900 dark:text-white placeholder-slate-400">
+                                </div>
+                                <div class="overflow-y-auto flex-1 custom-scrollbar p-1" id="target-list">
+                                    <!-- Options -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeframe Toggle -->
+                    <div class="mt-6 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg flex items-center">
+                        <button
+                            class="px-4 py-2 rounded-md text-sm font-bold transition-all bg-white dark:bg-slate-700 shadow-sm"
+                            data-days="7">7 Days</button>
+                        <button
+                            class="px-4 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-primary transition-all"
+                            data-days="30">30 Days</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Card -->
+            <div
+                class="bg-white dark:bg-slate-900/50 p-6 md:p-10 rounded-3xl shadow-2xl border border-white/10 backdrop-blur-md relative overflow-hidden">
+                <canvas id="trendChart" class="w-full h-[400px]"></canvas>
+            </div>
+
+        </div>
+    </main>
+</body>
+
+</html>
